@@ -31,9 +31,9 @@ function Home() {
       {users.map((user) => (
         <div key={user.id} className='card'>
           <div>
-            <p>Nome: {user.name}</p>
-            <p>Email: {user.email}</p>
-            <p>Age: {user.age}</p>
+            <p>Nome: <span>{user.name}</span></p>
+            <p>Email: <span>{user.email}</span></p>
+            <p>Age: <span>{user.age}</span></p>
           </div>
           
           <button>

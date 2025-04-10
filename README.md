@@ -14,9 +14,9 @@ If you are developing a production application, we recommend using TypeScript an
 
 ### Create project React
 
-## Requsiitos
+## Requisitos
 
-`Necessário ter o NodeJs instalados`
+- `Necessário ter o NodeJs instalados`
 
 ## Comandos
 
@@ -24,7 +24,7 @@ If you are developing a production application, we recommend using TypeScript an
 npm create vite@latest
 ```
 
-`Aparaecerá a opção de digiar o nome do projeto`
+`Apararecerá a opção de digiar o "nome do projeto"`
 
 <img src="/public/manual/create_projeto.png">
 
@@ -47,4 +47,14 @@ npm i
 
 ```
 npm run dev
+```
+
+## Integração com a API-server
+
+# Iniciar servidor API
+
+# Instalar a biblioteca Axios
+
+```
+npm install axios
 ```

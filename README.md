@@ -58,3 +58,7 @@ npm run dev
 ```
 npm install axios
 ```
+
+# Pós instalação
+
+- Criar nova pasta dentro de src com o nome de `services`

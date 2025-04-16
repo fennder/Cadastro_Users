@@ -1,16 +1,48 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import './style.css'
 import Trash from '../../assets/lixeira.png'
+import Edit from '../../assets/editar.png'
 import api from '../../services/api'
 
 function Home() {
 
   const [users, setUsers] = useState([])
 
+  const inputName = useRef()
+  const inputEmail = useRef()
+  const inputAge = useRef()
+
+  //Função para pegar dados
   async function getUsers(){
     const usersFromApi = await api.get('/users')
 
     setUsers(usersFromApi.data)
+  }
+
+
+  //Função para cadastrar usuário
+  async function createUsers(){
+
+    await api.post('/users', {
+      name: inputName.current.value,
+      email: inputEmail.current.value,
+      age: Number(inputAge.current.value)
+    })
+    getUsers()
+  }
+  // //Função para editar usuário
+  // async function updateUsers(id){
+  //   await api.put(`/users/${id}`, {
+  //     name: inputName.current.value,
+  //     email: inputEmail.current.value,
+  //     age: Number(inputAge.current.value)
+  //   })
+  //   getUsers()
+  // }
+
+  async function deleteUsers(id){
+    await api.delete(`/users/${id}`)
+    getUsers()
   }
 
   useEffect(() => {
@@ -22,10 +54,10 @@ function Home() {
     <div className='container'>
       <form>
         <h1>Cadastro de Usuários</h1>
-        <input name='name' type="text" placeholder='Enter your name' />
-        <input name='email' type="email" placeholder='Enter your email' />
-        <input name='age' type="number" placeholder='Enter your age' />
-        <button type="button" className='button'>Cadastrar</button>
+        <input name='name' type="text" placeholder='Enter your name' ref={inputName} />
+        <input name='email' type="email" placeholder='Enter your email' ref={inputEmail}/>
+        <input name='age' type="number" placeholder='Enter your age' ref={inputAge}/>
+        <button type="button" onClick={createUsers()}>Cadastrar</button>
       </form>
 
       {users.map((user) => (
@@ -36,9 +68,12 @@ function Home() {
             <p>Age: <span>{user.age}</span></p>
           </div>
           
-          <button>
+          <button onClick={() => deleteUsers(user.id)}>
             <img src={Trash} alt="Trash" />
           </button>
+          {/* <button onClick={() => updateUsers(user.id)}>
+            <img src={Edit} alt="Edit" />
+          </button> */}
         </div>
 
       ))}
